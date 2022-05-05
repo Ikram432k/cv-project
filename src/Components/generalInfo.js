@@ -1,5 +1,5 @@
 import { Component } from "react";
-import uniqid from "uniqid";
+// import uniqid from "uniqid";
 import GeneralView from "./educationalView";
 
 class General extends Component{
@@ -11,10 +11,11 @@ class General extends Component{
             Fname:'',
             Lname:'',
             email:'',
+
             Pnumber:'',
-            id:uniqid(),
+            // id:uniqid(),
           },
-          infos:[],
+          // infos:[],
         };
         this.handleChange = this.handleChange.bind(this)
     }
@@ -25,7 +26,7 @@ class General extends Component{
       this.setState({
            info:{
               [name]:e.target.value,
-              id:this.state.info.id,
+              // id:this.state.info.id,
             // [e.target.name]:e.target.value
 
            },
@@ -35,16 +36,16 @@ class General extends Component{
     onSubmitform =(e)=>{
       e.preventDefault();
       this.setState({
-        infos:this.state.infos.concat(this.state.info),
+        // infos:this.state.infos.concat(this.state.info),
         info:{
           Fname:'',
           Lname:'',
           email:'',
           Pnumber:'',
-          id:uniqid(),
+          // id:uniqid(),
         },
         });
-        console.log(this.state.infos)
+        // console.log(this.state.infos)
         
     };
     openForm = ()=>{
@@ -54,7 +55,7 @@ class General extends Component{
       this.setState({className:'unactive'})
     }
     render(){
-      const{ info,infos } = this.state;
+      const{ info } = this.state;
 
         return(
             <div className='general'>
@@ -71,7 +72,7 @@ class General extends Component{
               <button onClick={this.onSubmitform}>Save</button>
               <button onClick={this.closeForm}>Delete</button>
             </form>
-            <GeneralView infos={infos}/>
+            <GeneralView info={info}/>
             <button onClick={this.openForm}>Add</button>
           </div>
         )
