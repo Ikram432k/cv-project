@@ -14,27 +14,18 @@ class General extends Component{
             Pnumber:'',
           },
         };
-        this.handleChange = this.handleChange.bind(this)
+        // this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange=(e)=>{
       this.setState({
-           info:{
+           info:{...this.state.info,
             [e.target.name]:e.target.value,
            },
         });
-
     };
     onSubmitform =(e)=>{
       e.preventDefault();
-      this.setState({
-        info:{
-          Fname:'',
-          Lname:'',
-          email:'',
-          Pnumber:'',
-        },
-        });
         console.log(this.state.info)
     this.closeForm()   
     };
@@ -61,7 +52,7 @@ class General extends Component{
               <label htmlFor='g-Pnumber'>Phone Number</label>
               <input onChange={this.handleChange} value={info.Pnumber} type="text" className='input g-Pnumber' name="Pnumber"/>
               <button onClick={this.onSubmitform}>Save</button>
-              <button onClick={this.closeForm}>Delete</button>
+              {/* <button onClick={this.closeForm}>Delete</button> */}
             </form>
             <button onClick={this.openForm}>Add</button>
           </div>
