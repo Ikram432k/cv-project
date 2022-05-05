@@ -1,6 +1,6 @@
 import { Component } from "react";
 // import uniqid from "uniqid";
-import GeneralView from "./educationalView";
+import GeneralView from "./GeneralView";
 
 class General extends Component{
     constructor(props){
@@ -11,42 +11,32 @@ class General extends Component{
             Fname:'',
             Lname:'',
             email:'',
-
             Pnumber:'',
-            // id:uniqid(),
           },
-          // infos:[],
         };
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange=(e)=>{
-      const target = e.target;
-      const name = target.name;
       this.setState({
            info:{
-              [name]:e.target.value,
-              // id:this.state.info.id,
-            // [e.target.name]:e.target.value
-
+            [e.target.name]:e.target.value,
            },
         });
-        console.log(this.state.info)
+
     };
     onSubmitform =(e)=>{
       e.preventDefault();
       this.setState({
-        // infos:this.state.infos.concat(this.state.info),
         info:{
           Fname:'',
           Lname:'',
           email:'',
           Pnumber:'',
-          // id:uniqid(),
         },
         });
-        // console.log(this.state.infos)
-        
+        console.log(this.state.info)
+    this.closeForm()   
     };
     openForm = ()=>{
       this.setState({className:''});
@@ -60,6 +50,7 @@ class General extends Component{
         return(
             <div className='general'>
             <h2>General Information</h2>
+            <GeneralView info={info}/>
             <form className={this.state.className}>
               <label htmlFor='g-Fname'>First Name:</label>
               <input onChange={this.handleChange} value={info.Fname} type="text" className='input g-Fname' name="Fname"/>
@@ -72,11 +63,9 @@ class General extends Component{
               <button onClick={this.onSubmitform}>Save</button>
               <button onClick={this.closeForm}>Delete</button>
             </form>
-            <GeneralView info={info}/>
             <button onClick={this.openForm}>Add</button>
           </div>
         )
     }
 }
-// , infos
 export default General;
