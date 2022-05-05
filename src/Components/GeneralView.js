@@ -1,14 +1,12 @@
 import React from "react";
 
 const GeneralView = (props) =>{
-      const { infos } = props;
+      const { info } = props;
   
       return(
-          <ul>
-              {infos.map((info)=>{
-                  return<li key={info.id}>{info.Fname}</li>
-              })}
-          </ul>
-      );
+        <div>
+            <h3>{info.Fname}</h3>
+        </div>
+      ); 
   };
 export default GeneralView;
