@@ -12,6 +12,8 @@ class Education extends Component{
             Sto:'',
           },
           infos:[],
+          index:'',
+          edited:true,
         };
     }
     handleChange=(e)=>{
@@ -19,16 +21,24 @@ class Education extends Component{
         info:{...this.state.info,
           [e.target.name]:e.target.value,
          },
-        //  infos:{...this.state.info},
       });
     }
     onSumbitForm=(e)=>{
       e.preventDefault();
       let temp = this.state.infos
+      if(!this.state.edited){
+        temp[Number(this.state.index)] = this.state.info;
+        this.setState({
+          infos:[...temp]
+        });
+        this.closeForm();
+        return;
+      }
       temp.push(this.state.info);
       this.setState({
-        infos:{...temp}
+        infos:[...temp]
       });
+      this.closeForm()   
 
       console.log(this.state.infos)
     }
@@ -36,15 +46,33 @@ class Education extends Component{
       this.setState({className:''});
     }
     closeForm = ()=>{
-      this.setState({className:'unactive'})
+      this.setState(
+        {info:{
+          Sname:'',
+          title:'',
+          Sfrom:'',
+          Sto:'',
+        },
+        className:'unactive'})
+
+    }
+    cancelForm = (e)=>{
+      e.preventDefault();
+      this.closeForm()
+    }
+    editForm = (e)=>{
+      this.openForm();
+      this.setState({info:(Object.assign(this.state.infos[Number(e.target.id)])),
+        index:e.target.id,
+        edited:false,
+      });
     }
     render(){
       const{ info,infos } = this.state;
-
         return(
             <div className='educational'>
             <h2>Educational Information</h2>
-            <EducationView infos={infos} />
+            <EducationView infos={infos} edit={this.editForm}/>
             <form className={this.state.className}>
               <label htmlFor='Sname'>School Name:</label>
               <input onChange={this.handleChange} value={info.Sname} type="text" className='input Sname' name="Sname"/>
@@ -55,7 +83,7 @@ class Education extends Component{
               <label htmlFor='Sto'>To</label>
               <input onChange={this.handleChange} value={info.Sto} type="date" className='input Sto' name="Sto"/>
               <button onClick={this.onSumbitForm}>Save</button>
-              <button onClick={this.closeForm}>Delete</button>
+              <button onClick={this.cancelForm}>Delete</button>
             </form>
             <button onClick={this.openForm}>Add</button>
           </div>
@@ -63,5 +91,3 @@ class Education extends Component{
     }
 }
 export default Education
-
-// className={`${this.state.isActive && 'Active'}`}onClick={this.addForm} className='addbtn'
