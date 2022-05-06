@@ -26,13 +26,14 @@ class General extends Component{
     };
     onSubmitform =(e)=>{
       e.preventDefault();
+      
         console.log(this.state.info)
     this.closeForm()   
     };
     openForm = ()=>{
       this.setState({className:''});
     }
-    closeForm = ()=>{
+    closeForm = (e)=>{
       this.setState({className:'unactive'})
     }
     render(){
@@ -52,7 +53,7 @@ class General extends Component{
               <label htmlFor='g-Pnumber'>Phone Number</label>
               <input onChange={this.handleChange} value={info.Pnumber} type="text" className='input g-Pnumber' name="Pnumber"/>
               <button onClick={this.onSubmitform}>Save</button>
-              {/* <button onClick={this.closeForm}>Delete</button> */}
+              <button onClick={this.openForm}>Delete</button>
             </form>
             <button onClick={this.openForm}>Add</button>
           </div>
