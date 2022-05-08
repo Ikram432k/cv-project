@@ -6,13 +6,16 @@ class General extends Component{
     constructor(props){
         super(props)
         this.state = {
-          className:'unactive',
+          className:'',
           info:{
             Fname:'',
             Lname:'',
             email:'',
             Pnumber:'',
           },
+          infos:[],
+          index:'',
+          edited:true,
         };
         // this.handleChange = this.handleChange.bind(this)
     }
@@ -26,7 +29,10 @@ class General extends Component{
     };
     onSubmitform =(e)=>{
       e.preventDefault();
-      
+      let temp = this.state.info
+      this.setState({
+        info:{...temp}
+      })
         console.log(this.state.info)
     this.closeForm()   
     };
@@ -36,13 +42,16 @@ class General extends Component{
     closeForm = (e)=>{
       this.setState({className:'unactive'})
     }
+    editForm=()=>{
+      this.openForm()
+    }
     render(){
       const{ info } = this.state;
 
         return(
             <div className='general'>
-            <h2>General Information</h2>
-            <GeneralView info={info}/>
+            <h2 className="subTitle">General Information</h2>
+            <GeneralView info={info} edit={this.editForm}/>
             <form className={this.state.className}>
               <label htmlFor='g-Fname'>First Name:</label>
               <input onChange={this.handleChange} value={info.Fname} type="text" className='input g-Fname' name="Fname"/>
@@ -52,10 +61,11 @@ class General extends Component{
               <input onChange={this.handleChange} value={info.email} type="text" className='input g-email' name="email"/>
               <label htmlFor='g-Pnumber'>Phone Number</label>
               <input onChange={this.handleChange} value={info.Pnumber} type="text" className='input g-Pnumber' name="Pnumber"/>
-              <button onClick={this.onSubmitform}>Save</button>
-              <button onClick={this.openForm}>Delete</button>
+              <button onClick={this.onSubmitform} className='formBtn'>Save</button>
+              {/* <button onClick={this.openForm}>Delete</button> */}
             </form>
-            <button onClick={this.openForm}>Add</button>
+            {/* <button onClick={this.openForm}>Add</button> */}
+
           </div>
         )
     }
