@@ -2,3 +2,97 @@
 .unactive{
  display: none;
 }
+
+body{
+    font-family: "Montserrat",sans-serif;
+    font-size: .9rem;
+    font: weight 400;
+    margin: 0;
+}
+input{
+    font-family: "Montserrat",sans-serif;
+
+}
+button{
+    font-family: "Montserrat",sans-serif;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    color: black;
+    background-color: aliceblue;
+	border: rgba(97, 97, 97, 0.61) solid 1px;
+
+}
+button:hover{
+    background-color: #dadada;
+}
+main{
+    margin: auto;
+    border: 2px solid ;
+    width: 60vw;
+    /* max-width: 600px; */
+	height: 100%;
+    padding: 15px;
+}
+
+.subTitle{
+    margin-top:20px ;
+    padding-bottom: 5px;
+    font-size: 200;
+    text-decoration: underline;
+    text-decoration-style:none ;
+}
+.title{
+    text-align: center;
+}
+.addBtn{
+    width: 75px;
+    height: 25px;
+    border-radius: 5px
+}
+form{
+    display: grid;
+    grid-template-columns: repeat(1,50%);
+    grid-template-rows: repeat(5,auto);
+    /* justify-content: center; */
+    align-items: flex-start;
+    height: 300px;
+    padding: 5px;
+}
+form > label{
+    /* width: 90%; */
+    /* height: 100%; */
+    margin: 5px;
+}
+/* label > input{
+    width: 90%;
+    height: 40%;
+    margin-top: 5px;
+} */
+.formBtn {
+	width: 100px;
+	height: 30px;
+	display: block;
+	margin: auto;
+	margin-bottom: 10px;
+}
+.contact{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.editBtn {
+    float: right;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.edit{
+    display: none;
+    opacity: 0;
+}
+@media only screen and (max-width:600px) {
+    main{
+        width: 100%;
+        border: none;
+    }
+}
