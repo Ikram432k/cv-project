@@ -71,21 +71,21 @@ class Education extends Component{
       const{ info,infos } = this.state;
         return(
             <div className='educational'>
-            <h2>Educational Information</h2>
+            <h2 className="subTitle">Educational Information</h2>
             <EducationView infos={infos} edit={this.editForm}/>
             <form className={this.state.className}>
               <label htmlFor='Sname'>School Name:</label>
               <input onChange={this.handleChange} value={info.Sname} type="text" className='input Sname' name="Sname"/>
               <label htmlFor='title'>Title Of Study:</label>
-              <input onChange={this.handleChange} value={info.title} type="text" className='input title' name="title"/>
+              <input onChange={this.handleChange} value={info.title} type="text" className='input edutitle' name="title"/>
               <label htmlFor='Sfrom'>From:</label>
               <input onChange={this.handleChange} value={info.Sfrom} type="date" className='input Sfrom' name="Sfrom"/>
               <label htmlFor='Sto'>To</label>
               <input onChange={this.handleChange} value={info.Sto} type="date" className='input Sto' name="Sto"/>
-              <button onClick={this.onSumbitForm}>Save</button>
-              <button onClick={this.cancelForm}>Delete</button>
+              <button onClick={this.onSumbitForm} className='formBtn'>Save</button>
+              {/* <button onClick={this.cancelForm}>Delete</button> */}
             </form>
-            <button onClick={this.openForm}>Add</button>
+            <button onClick={this.openForm} className='addBtn'>Add</button>
           </div>
         )
     }
