@@ -54,13 +54,13 @@ class General extends Component{
             <GeneralView info={info} edit={this.editForm}/>
             <form className={this.state.className}>
               <label htmlFor='g-Fname'>First Name:</label>
-              <input onChange={this.handleChange} value={info.Fname} type="text" className='input g-Fname' name="Fname"/>
+              <input onChange={this.handleChange} value={info.Fname} type="text" className='input g-Fname' name="Fname" required/>
               <label htmlFor='g-Lname'>Second Name:</label>
-              <input onChange={this.handleChange} value={info.Lname} type="text" className='input g-Lname' name="Lname"/>
+              <input onChange={this.handleChange} value={info.Lname} type="text" className='input g-Lname' name="Lname" required/>
               <label htmlFor='g-email'>Email:</label>
-              <input onChange={this.handleChange} value={info.email} type="text" className='input g-email' name="email"/>
+              <input onChange={this.handleChange} value={info.email} type="text" className='input g-email' name="email" required/>
               <label htmlFor='g-Pnumber'>Phone Number</label>
-              <input onChange={this.handleChange} value={info.Pnumber} type="text" className='input g-Pnumber' name="Pnumber"/>
+              <input onChange={this.handleChange} value={info.Pnumber} type="text" className='input g-Pnumber' name="Pnumber" required/>
               <button onClick={this.onSubmitform} className='formBtn'>Save</button>
               {/* <button onClick={this.openForm}>Delete</button> */}
             </form>
