@@ -11,7 +11,7 @@ class App extends Component{
 render(){
   return(
   <main>
-      <h1 className='title'>CV-creator</h1>
+      {/* <h1 className='title'>CV-creator</h1> */}
       <General />
       <hr/>
       <Education />
