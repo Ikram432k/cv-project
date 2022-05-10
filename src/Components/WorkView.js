@@ -11,9 +11,10 @@ return(
             <h3>{info.Ptitle}</h3>
             <p>{info.Wfrom} - {info.Wto}</p>
             <p>{info.tasks}</p>
-            <div className="editBtn">
-            <span className="material-icons editIcon">create</span>
-                <button onClick={props.edit} id={i}></button>
+            <div className="edit">
+                <button className="editBtn" onClick={props.edit} id={i}>
+                <span className="material-icons editIcon">create</span>
+                </button>
             </div>
         </div>
         )})}
