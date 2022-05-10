@@ -6,7 +6,7 @@ const GeneralView = (props) =>{
       return(
         <div>
         <div>
-            <h3>{info.Fname} {info.Lname}</h3>
+            <h1>{info.Fname} {info.Lname}</h1>
             <div className="contact">
             <i className="material-icons">call</i>
             <p>{info.Pnumber}</p>
@@ -16,9 +16,10 @@ const GeneralView = (props) =>{
             <p>{info.email}</p>
         </div>
         </div>
-                    <div className="editBtn">
+              <div className="edit">
+                    <button className="editBtn" onClick={props.edit}>
                     <span className="material-icons editIcon">create</span>
-                    <button onClick={props.edit}></button>
+                    </button>
                 </div>
         </div>
       ); 
