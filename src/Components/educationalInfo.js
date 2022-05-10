@@ -16,6 +16,7 @@ class Education extends Component{
           edited:true,
         };
     }
+    
     handleChange=(e)=>{
       this.setState({
         info:{...this.state.info,
@@ -85,7 +86,7 @@ class Education extends Component{
               <button onClick={this.onSumbitForm} className='formBtn'>Save</button>
               {/* <button onClick={this.cancelForm}>Delete</button> */}
             </form>
-            <button onClick={this.openForm} className='addBtn'>Add</button>
+            <button onClick={this.openForm} className='addBtn formBtn'>Add</button>
           </div>
         )
     }
