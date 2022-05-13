@@ -1,97 +1,99 @@
-import { Component } from "react";
+import { useState } from "react";
 import WorkView from "./WorkView";
-class Work extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-          className:'unactive',
-          info:{
-            Wname:'',
-            Ptitle:'',
-            Wfrom:'',
-            Wto:'',
-            tasks:'',
-          },
-          infos:[],
-          index:'',
-          edited:true,
-        };
+function Work(){
+  const [info,setInfo]=useState(
+    {
+      Wname:'',
+      Ptitle:'',
+      Wfrom:'',
+      Wto:'',
+      tasks:'',
+    }
+  );
+  let [className,setClassName]=useState('unactive');  
+  const [infos,setInfos]=useState([]);
+  const [index,setIndex]=useState('');
+  const [edited,setEdited]=useState(true);
 
-    }
-    handleChange=(e)=>{
-      this.setState({
-        info:{...this.state.info,
-          [e.target.name]:e.target.value,
-         },
-      });
-    }
-    onSumbitForm=(e)=>{
+  const handleChange=(e)=>{
+    setInfo({...info,[e.target.name]:e.target.value});
+  };
+
+   const onSumbitForm=(e)=>{
       e.preventDefault();
-      let temp = this.state.infos
-      if(!this.state.edited){
-        temp[Number(this.state.index)] = this.state.info;
-        this.setState({
-          infos:[...temp]
-        });
-        this.closeForm();
+      if(validation()){
+      let temp = infos
+      if(!edited){
+        temp[Number(index)] = info;
+        setInfos([...temp]);
+        closeForm();
         return;
       }
-      temp.push(this.state.info);
-      this.setState({
-        infos:[...temp]
-      });
-      this.closeForm()   
+      temp.push(info);
+      setInfos([...temp]);
+      closeForm();
+    }
+    };
+    const openForm = ()=>{
+      setClassName({className:''});
+    }
+    const closeForm = ()=>{
+      setClassName(className='unactive')
 
-      console.log(this.state.infos)
-    }
-    openForm = ()=>{
-      this.setState({className:''});
-    }
-    closeForm = ()=>{
-      this.setState(
-        {info:{
+        setInfo({
           Wname:'',
           Ptitle:'',
           Wfrom:'',
           Wto:'',
           tasks:'',
-        },
-        className:'unactive'})
+        })
+
     }
-    cancelForm = (e)=>{
+
+    const editForm = (e)=>{
+      openForm();
+      setInfo(Object.assign(infos[Number(e.target.id)]));
+        setIndex(e.target.id);
+        setEdited(false);
+    }
+
+    const validation=()=>{
+      const{Wname,Ptitle,Wfrom,Wto,tasks} = info;
+        if(!Wname || !Ptitle || !Wfrom || !Wto || !tasks){
+          alert('please make sure to fill all the fields');
+          return false;
+        }
+        return true;
+    };
+    const cancel = (e)=>{
       e.preventDefault();
-      this.closeForm()
+      closeForm();
     }
-    editForm = (e)=>{
-      this.openForm();
-      this.setState({info:(Object.assign(this.state.infos[Number(e.target.id)])),
-        index:e.target.id,
-        edited:false,
-      });
-    }
-    render(){
-      const{ info,infos } = this.state;
+      const{ Wname,Ptitle,Wfrom,Wto,tasks} = info
         return(
             <div className='work'>
             <h2 className="subTitle">Work Experience</h2>
-            <WorkView infos={infos} edit={this.editForm}/>
-            <form className={this.state.className}>
+            <WorkView infos={infos} edit={editForm}/>
+            <form className={className}>
             <label htmlFor='Wname'>Company Name:</label>
-              <input onChange={this.handleChange} value={info.Wname} type="text" className='input Wname' name="Wname"/>
+              <input onChange={handleChange} value={Wname} type="text" className='input Wname' name="Wname"/>
               <label htmlFor='Ptitle'>Position Title:</label>
-              <input onChange={this.handleChange} value={info.Ptitle} type="text" className='input Ptitle' name="Ptitle"/>
+              <input onChange={handleChange} value={Ptitle} type="text" className='input Ptitle' name="Ptitle"/>
               <label htmlFor='Wfrom'>From:</label>
-              <input onChange={this.handleChange} value={info.Wfrom} type="date" className='input Wfrom' name="Wfrom"/>
+              <input onChange={handleChange} value={Wfrom} type="date" className='input Wfrom' name="Wfrom"/>
               <label htmlFor='Wto'>To:</label>
-              <input onChange={this.handleChange} value={info.Wto} type="date" className='input Wto' name="Wto"/>
+              <input onChange={handleChange} value={Wto} type="date" className='input Wto' name="Wto"/>
               <label htmlFor='tasks'>Description:</label>
-              <textarea onChange={this.handleChange} value={info.tasks} name="tasks" className="input tasks" placeholder="Main Tasks" required=""></textarea>
-              <button onClick={this.onSumbitForm} className='formBtn'>Save</button>
-              {/* <button onClick={this.cancelForm}>Delete</button> */}
+              <textarea onChange={handleChange} value={tasks} name="tasks" className="input tasks" placeholder="Main Tasks" required=""></textarea>
+              <div className="formEditBtn">
+              <button onClick={onSumbitForm} className='btn formBtn'>Save</button>
+              <button onClick={cancel} className='btn formBtn'>Cancel</button>
+              </div>
             </form>
-            <button onClick={this.openForm} className='addBtn formBtn'>Add</button>
+            <button onClick={openForm} className='addBtn formBtn'>Add</button>
+
           </div>
         )
-    }
+    
 }
 export default Work;
