@@ -1,94 +1,116 @@
-import { Component } from "react";
+import React ,{ useState } from "react";
 import EducationView from "./EducationalView";
-class Education extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-          className:'unactive',
-          info:{
-            Sname:'',
-            title:'',
-            Sfrom:'',
-            Sto:'',
-          },
-          infos:[],
-          index:'',
-          edited:true,
-        };
+// function EducationalView(props){
+//   return(
+//       <div>
+//           {props.infos.map((info,i)=>{
+//           return(
+//           <div key={i}>
+//               <h3>{info.title}</h3>
+//               <p>{info.Sfrom} - {info.Sto}</p>
+//               <h3>{info.Sname}</h3>
+//               <div >
+//                   <button className="editBtn" onClick={props.edit} id={i}>
+//                   <span className="material-icons editIcon">create</span>
+//                   </button>
+//               </div>
+//           </div>
+//           )})}
+  
+//       </div>
+//   )
+//   }
+
+function Education(){
+  const [info,setInfo]=useState(
+    {
+      Sname:'',
+      title:'',
+      Sfrom:'',
+      Sto:'',
     }
-    
-    handleChange=(e)=>{
-      this.setState({
-        info:{...this.state.info,
-          [e.target.name]:e.target.value,
-         },
-      });
-    }
-    onSumbitForm=(e)=>{
+  );
+  let [className,setClassName]=useState('unactive');  
+  const [infos,setInfos]=useState([]);
+  const [index,setIndex]=useState('');
+  const [edited,setEdited]=useState(true);
+
+  const handleChange=(e)=>{
+    setInfo({...info,[e.target.name]:e.target.value});
+  };
+
+   const onSumbitForm=(e)=>{
       e.preventDefault();
-      let temp = this.state.infos
-      if(!this.state.edited){
-        temp[Number(this.state.index)] = this.state.info;
-        this.setState({
-          infos:[...temp]
-        });
-        this.closeForm();
+      if(validation()){
+      let temp = infos
+      if(!edited){
+        temp[Number(index)] = info;
+        setInfos([...temp]);
+        closeForm();
         return;
       }
-      temp.push(this.state.info);
-      this.setState({
-        infos:[...temp]
-      });
-      this.closeForm()   
+      temp.push(info);
+      setInfos([...temp]);
+      closeForm();
+    }
+    }
+    const openForm = ()=>{
+      setClassName({className:''});
+    }
+    const closeForm = ()=>{
+      setClassName(className='unactive')
 
-      console.log(this.state.infos)
-    }
-    openForm = ()=>{
-      this.setState({className:''});
-    }
-    closeForm = ()=>{
-      this.setState(
-        {info:{
+        setInfo({
           Sname:'',
           title:'',
           Sfrom:'',
           Sto:'',
-        },
-        className:'unactive'})
+        })
 
     }
-    cancelForm = (e)=>{
+
+    const editForm = (e)=>{
+      openForm();
+      setInfo(Object.assign(infos[Number(e.target.id)]));
+        setIndex(e.target.id);
+        setEdited(false);
+    }
+
+    const validation=()=>{
+      const{Sname,title,Sfrom,Sto} = info;
+        if(!Sname || !title || !Sfrom || !Sto ){
+          alert('please make sure to fill all the fields');
+          return false;
+        }
+        return true;
+    };
+
+    const cancel = (e)=>{
       e.preventDefault();
-      this.closeForm()
+      closeForm();
     }
-    editForm = (e)=>{
-      this.openForm();
-      this.setState({info:(Object.assign(this.state.infos[Number(e.target.id)])),
-        index:e.target.id,
-        edited:false,
-      });
-    }
-    render(){
-      const{ info,infos } = this.state;
+
+      const{ Sname,title,Sfrom,Sto } = info
         return(
             <div className='educational'>
             <h2 className="subTitle">Educational Information</h2>
-            <EducationView infos={infos} edit={this.editForm}/>
-            <form className={this.state.className}>
+            <EducationView infos={infos} edit={editForm}/>
+            <form className={className}>
               <label htmlFor='Sname'>School Name:</label>
-              <input onChange={this.handleChange} value={info.Sname} type="text" className='input Sname' name="Sname"/>
+              <input onChange={handleChange} value={Sname} type="text" className='input Sname' name="Sname"/>
               <label htmlFor='title'>Title Of Study:</label>
-              <input onChange={this.handleChange} value={info.title} type="text" className='input edutitle' name="title"/>
+              <input onChange={handleChange} value={title} type="text" className='input edutitle' name="title"/>
               <label htmlFor='Sfrom'>From:</label>
-              <input onChange={this.handleChange} value={info.Sfrom} type="date" className='input Sfrom' name="Sfrom"/>
+              <input onChange={handleChange} value={Sfrom} type="date" className='input Sfrom' name="Sfrom"/>
               <label htmlFor='Sto'>To</label>
-              <input onChange={this.handleChange} value={info.Sto} type="date" className='input Sto' name="Sto"/>
-              <button onClick={this.onSumbitForm} className='formBtn'>Save</button>
-              {/* <button onClick={this.cancelForm}>Delete</button> */}
+              <input onChange={handleChange} value={Sto} type="date" className='input Sto' name="Sto"/>
+              <div className="formEditBtn">
+              <button onClick={onSumbitForm} className='btn formBtn ' >Save</button>
+              <button onClick={cancel} className='btn formBtn '>Cancel</button>
+              </div>
             </form>
-            <button onClick={this.openForm} className='addBtn formBtn'>Add</button>
+            <button onClick={openForm} className='addBtn formBtn'>Add</button>
           </div>
         )
-    }
 }
 export default Education
