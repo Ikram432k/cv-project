@@ -1,4 +1,18 @@
-
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.containerList{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0;
+}
+#items{
+    margin: 0;
+    padding-bottom:5px ;
+}
 .unactive{
  display: none;
 }
@@ -13,7 +27,14 @@ input{
     font-family: "Montserrat",sans-serif;
 
 }
-.general{
+.btn{
+    width: 70px;
+    height: 25px;
+}
+.formEditBtn{
+    display: flex;
+    justify-content:  space-between;
+    margin-top: 10px;
 }
 .formBtn{
     font-family: "Montserrat",sans-serif;
@@ -23,7 +44,9 @@ input{
     color: black;
     background-color: aliceblue;
 	border: rgba(97, 97, 97, 0.61) solid 1px;
-
+    display: block;
+	margin: auto;
+	margin-bottom: 10px;
 }
 button:hover{
     background-color: #dadada;
@@ -32,7 +55,6 @@ main{
     margin: auto;
     border: 2px solid ;
     width: 60vw;
-    /* max-width: 600px; */
 	height: 100%;
     padding: 15px;
 }
@@ -61,36 +83,24 @@ h1 {
     font-weight: 800;
 }
 .addBtn{
-    width: 75px;
-    height: 25px;
-    border-radius: 5px
+    border-radius: 5px;
+    width: 100px;
+	height: 30px;
 }
 form{
     display: grid;
     grid-template-columns: repeat(1,50%);
     grid-template-rows: repeat(5,auto);
-    /* justify-content: center; */
     align-items: flex-start;
-    height: 300px;
+    height: 100%;
     padding: 5px;
 }
 form > label{
-    /* width: 90%; */
-    /* height: 100%; */
+
     margin: 5px;
 }
-/* label > input{
-    width: 90%;
-    height: 40%;
-    margin-top: 5px;
-} */
-.formBtn {
-	width: 100px;
-	height: 30px;
-	display: block;
-	margin: auto;
-	margin-bottom: 10px;
-}
+
+
 .contact{
     display: flex;
     flex-direction: row;
