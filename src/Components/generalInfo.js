@@ -77,7 +77,9 @@ function General(){
     email:'',
     Pnumber:'',}
   );
-  let [className,setClassName]=useState('');    
+  let [className,setClassName]=useState('');
+  let [edit, setEdit] = useState('editButton');
+    
 
     const handleChange=(e)=>{
         setInfo({...info,[e.target.name]:e.target.value}) 
@@ -85,16 +87,20 @@ function General(){
     const onSubmitform =(e)=>{
       e.preventDefault();
       setClassName((className='unactive'));
+      setEdit((edit += ' editActive'));
+
     };
     const  editForm=()=>{
-      setClassName({className:''})};
+      setClassName({className:''})
+      setEdit((edit = 'editButton'));
+    };
       
     const {Fname,Lname,Pnumber,email}=info
 
     return(
             <div className='general'>
             <h2 className="subTitle">General Information</h2>
-            <GeneralView info={info} edit={editForm}/>
+            <GeneralView info={info} editForm={editForm} edit={edit} />
             <form onSubmit={onSubmitform} className={className} >
               <label htmlFor='g-Fname'>First Name:</label>
               <input onChange={handleChange} value={Fname} type="text" className='input g-Fname' name="Fname" required/>
@@ -102,12 +108,13 @@ function General(){
               <input onChange={handleChange} value={Lname} type="text" className='input g-Lname' name="Lname" required/>
               <label htmlFor='g-email'>Email:</label>
               <input onChange={handleChange} value={email} type="text" className='input g-email' name="email" required/>
-              <label htmlFor='g-Pnumber'>Phone Number</label>
+              <label htmlFor='g-Pnumber'>Phone Number:</label>
               <input onChange={handleChange} value={Pnumber} type="text" className='input g-Pnumber' name="Pnumber" required/>
               <div className="formEditBtn">
               <button type="submit" className='btn formBtn'>Save</button>
               </div>
             </form>
+
           </div>
         )
 }
