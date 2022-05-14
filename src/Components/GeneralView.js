@@ -16,8 +16,8 @@ return(
             <p id="items">{info.email}</p>
            </div>
            </div>
-              <div className="edit">
-                    <button className="editBtn" onClick={props.edit}>
+           <div className={props.edit}>
+                    <button className="editBtn" onClick={props.editForm}>
                     <span className="material-icons editIcon">create</span>
                     </button>
               </div>
