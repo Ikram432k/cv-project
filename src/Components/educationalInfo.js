@@ -102,7 +102,7 @@ function Education(){
               <input onChange={handleChange} value={title} type="text" className='input edutitle' name="title"/>
               <label htmlFor='Sfrom'>From:</label>
               <input onChange={handleChange} value={Sfrom} type="date" className='input Sfrom' name="Sfrom"/>
-              <label htmlFor='Sto'>To</label>
+              <label htmlFor='Sto'>To:</label>
               <input onChange={handleChange} value={Sto} type="date" className='input Sto' name="Sto"/>
               <div className="formEditBtn">
               <button onClick={onSumbitForm} className='btn formBtn ' >Save</button>
