@@ -9,7 +9,7 @@ return(
         <div key={i} className="container">
             <div className="containerList">
             <h3 id="items">{info.title}</h3>
-            <p id="items">{info.Sfrom}-{info.Sto}</p>
+            <p id="items">{info.Sfrom} - {info.Sto}</p>
             <h3 id="items">{info.Sname}</h3>
             </div>
             <div className="edit">
